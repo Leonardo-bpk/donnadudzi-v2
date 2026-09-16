@@ -21,10 +21,10 @@ const areas = [
       'O Teatro é uma forma de arte cênica que combina atuação, fala, gesto, música, dança e espetáculo para contar histórias. Ele desenvolve a criatividade, a expressão corporal e a comunicação.',
   },
   {
-    nome: 'Inglês',
-    imagem: '/Ingles.png',
+    nome: 'Programação',
+    imagem: '/Programacao.png',
     detalhe:
-      'O Inglês é a língua universal para negócios, ciência e internet. Dominá-lo abre portas para oportunidades globais, permitindo a comunicação e o acesso a um vasto conhecimento e cultura.',
+      'A programação é uma ferramenta essencial para a tecnologia e inovação. Aprendê-la desenvolve o raciocínio lógico, estimula a criatividade e permite transformar ideias em soluções, criando projetos, aplicativos, sites e novas oportunidades para o futuro.',
   },
 ]
 
@@ -45,7 +45,7 @@ function AreasAtuacao() {
         viewport={{ once: true }}
         className="mb-14 text-center text-4xl font-bold text-[#1f456e] md:text-5xl"
       >
-        Áreas de Atuação
+        Áreas de Projetos
       </motion.h1>
 
       <div className="mx-auto max-w-[1200px]">

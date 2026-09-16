@@ -4,9 +4,11 @@ import InfoCaixa from './components/InfoCaixa'
 import Projetos from './components/Projetos'
 import AreasAtuacao from './components/AreasAtuacao'
 import Faq from './components/Faq'
+import ProjetosDestaque from './components/ProjetosDestaque'
 import Footer from './components/Footer'
 
 import './App.css'
+
 
 function App() {
   return (
@@ -23,7 +25,9 @@ function App() {
         <AreasAtuacao />
 
         <Faq />
+        <ProjetosDestaque />
       </main>
+    
 
       <Footer />
     </>

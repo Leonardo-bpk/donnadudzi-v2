@@ -3,9 +3,8 @@ function Projetos() {
     <section className="relative w-full overflow-hidden bg-[#275fcf]">
 
       {/* Onda superior */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
+      <div className="absolute top-0 left-0 z-0 w-full overflow-hidden leading-[0]">
         <svg
-          data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
@@ -19,7 +18,7 @@ function Projetos() {
       </div>
 
       {/* Conteúdo */}
-      <div className="mx-auto flex min-h-[600px] w-full max-w-[1200px] flex-col items-center justify-center gap-10 px-5 pb-20 pt-32 md:flex-row md:gap-16 md:px-10">
+      <div className="relative z-10 mx-auto flex min-h-[600px] w-full max-w-[1200px] flex-col items-center justify-center gap-10 px-5 pb-32 pt-32 md:flex-row md:gap-16 md:px-10">
 
         {/* Imagem */}
         <div className="w-full md:w-1/2">
@@ -55,7 +54,27 @@ function Projetos() {
         </div>
 
       </div>
-
+{/* Onda inferior */}
+<div className="absolute bottom-0 left-0 z-0 w-full overflow-hidden leading-[0]">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 900 320"
+    preserveAspectRatio="none"
+    className="relative block h-[120px] w-full md:h-[150px]"
+  >
+    <path
+      fill="#ffffff"
+      d="M0,192
+         C180,140 300,130 450,175
+         C600,220 700,250 850,210
+         C1000,170 1100,100 1250,125
+         C1330,138 1380,150 1440,135
+         L1440,320
+         L0,320
+         Z"
+    />
+  </svg>
+</div>
     </section>
   )
 }

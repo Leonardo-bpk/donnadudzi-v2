@@ -1,3 +1,4 @@
+import logo from '../assets/logo.png'
 function Footer() {
   return (
     <footer className="w-full bg-[#1f456e] text-white">
@@ -6,11 +7,11 @@ function Footer() {
 
         {/* Logo */}
         <div className="flex items-start">
-          <img
-            src="/Logo-Branco-Academia-Donaduzzi@3x-8-2048x444.png"
-            alt="Logo da Donaduzzi Academy"
-            className="w-full max-w-[260px] object-contain"
-          />
+         <img
+  src={logo}
+  alt="Logo da Donaduzzi Academy"
+  className="w-full max-w-[260px] object-contain"
+/>
         </div>
 
         {/* Links */}
