@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 
 function Navbar() {
@@ -15,12 +16,6 @@ function Navbar() {
 
       {/* Links */}
       <nav className="hidden items-center gap-8 md:flex">
-        <a
-          href="#"
-          className="font-semibold text-white transition-colors duration-300 hover:text-[#ff8a1f]"
-        >
-          Formulário
-        </a>
 
         <a
           href="#"
@@ -29,12 +24,12 @@ function Navbar() {
           Projetos
         </a>
 
-        <a
-          href="#"
+        <Link
+          to="/login"
           className="font-semibold text-white transition-colors duration-300 hover:text-[#ff8a1f]"
         >
           Login
-        </a>
+        </Link>
       </nav>
 
       {/* Ações */}

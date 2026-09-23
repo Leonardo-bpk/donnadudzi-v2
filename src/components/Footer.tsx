@@ -34,7 +34,7 @@ function Footer() {
             </li>
 
             <li>
-              <a href="#" className="transition-colors hover:text-[#ff8000]">
+              <a href="/login" className="transition-colors hover:text-[#ff8000]">
                 Login
               </a>
             </li>

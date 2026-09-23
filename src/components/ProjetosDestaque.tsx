@@ -39,7 +39,7 @@ function ProjetosDestaque() {
   ];
 
   return (
-    <section className="w-full bg-[#f0f2f5] px-5 py-24">
+    <section className="w-full bg-[#fffff] px-5 py-24">
       <div className="mx-auto max-w-[1200px]">
 
         {/* Cabeçalho */}

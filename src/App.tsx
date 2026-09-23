@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 import InversionCircleScrollAnimation from './components/InversionCircleScrollAnimation'
 
 import CadastroProjeto from './pages/CadastroProjetos'
+import Login from './pages/Login'
 
 import './App.css'
 
@@ -21,10 +22,10 @@ function Home() {
       <Navbar />
 
       <InversionCircleScrollAnimation />
-
+      <Projetos />
       <InfoCaixa />
 
-      <Projetos />
+
 
       <AreasAtuacao />
 
@@ -51,6 +52,11 @@ function App() {
         <Route
           path="/cadastrar-projeto"
           element={<CadastroProjeto />}
+        />
+
+        <Route
+          path="/login"
+          element={<Login />}
         />
 
       </Routes>
