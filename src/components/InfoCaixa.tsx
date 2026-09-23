@@ -2,7 +2,7 @@ function InfoCaixa() {
   return (
     <section
       id="infocaixa"
-      className="w-full bg-[#f0f2f5] px-5 py-[70px] md:px-10 md:py-[100px]"
+      className="w-full bg-white px-5 py-[70px] md:px-10 md:py-[100px]"
     >
       <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-5 md:grid-cols-2">
 
