@@ -1,12 +1,15 @@
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
 import InfoCaixa from './components/InfoCaixa'
-import Projetos from './components/Projetos'
+import ProjetosExpli from './components/ProjetosExpli'
 import AreasAtuacao from './components/AreasAtuacao'
 import Faq from './components/Faq'
 import ProjetosDestaque from './components/ProjetosDestaque'
 import Footer from './components/Footer'
+import Perfil from './pages/Perfil'
+import Projetos from './pages/Projetos'
 
 import InversionCircleScrollAnimation from './components/InversionCircleScrollAnimation'
 
@@ -15,17 +18,14 @@ import Login from './pages/Login'
 
 import './App.css'
 
-
 function Home() {
   return (
     <>
       <Navbar />
 
       <InversionCircleScrollAnimation />
-      <Projetos />
+      <ProjetosExpli />
       <InfoCaixa />
-
-
 
       <AreasAtuacao />
 
@@ -38,15 +38,18 @@ function Home() {
   )
 }
 
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         <Route
           path="/"
           element={<Home />}
+        />
+
+        <Route
+          path="/projetos"
+          element={<Projetos />}
         />
 
         <Route
@@ -59,6 +62,10 @@ function App() {
           element={<Login />}
         />
 
+        <Route
+          path="/perfil"
+          element={<Perfil />}
+        />
       </Routes>
     </BrowserRouter>
   )
