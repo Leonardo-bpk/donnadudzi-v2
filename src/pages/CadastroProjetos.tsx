@@ -1,5 +1,7 @@
+
 import { useState } from "react";
 import type { FormEvent } from "react";
+import Navbar from "../components/Navbar";
 
 interface Aluno {
   nome: string;
@@ -129,480 +131,612 @@ export default function CadastroProjeto() {
     setSucesso(true);
   }
 
-  const inputClass = (campo: string) =>
-    `
-      w-full
-      border
-      border-white/[0.10]
-      bg-[#1B3D6D]
-      px-3.5
-      py-3
-      text-sm
-      text-white
-      outline-none
-      transition-all
-      duration-150
-      placeholder:text-blue-100/45
-      hover:border-white/[0.18]
-      focus:border-[#FF7A00]
-      focus:ring-2
-      focus:ring-[#FF7A00]/15
-      ${
-        erros[campo]
-          ? "border-red-400/70 focus:border-red-400 focus:ring-red-400/10"
-          : ""
-      }
-    `;
+  /*
+   * ============================================================
+   * ESTILOS
+   * ============================================================
+   */
+
+  const inputClass = (campo: string) => `
+    w-full
+    border
+    ${
+      erros[campo]
+        ? "border-red-400 focus:border-red-500 focus:ring-red-500/10"
+        : "border-slate-200 focus:border-[#275FCF] focus:ring-[#275FCF]/10"
+    }
+    bg-white
+    px-4
+    py-3
+    text-sm
+    text-slate-800
+    outline-none
+    transition-all
+    duration-150
+    placeholder:text-slate-400
+    hover:border-slate-300
+    focus:ring-4
+  `;
+
+  const blueInputClass = (campo: string) => `
+    w-full
+    border
+    ${
+      erros[campo]
+        ? "border-red-300 focus:border-red-400 focus:ring-red-400/20"
+        : "border-white/25 focus:border-white/70 focus:ring-white/10"
+    }
+    bg-white
+    px-4
+    py-3
+    text-sm
+    text-slate-800
+    outline-none
+    transition-all
+    duration-150
+    placeholder:text-slate-400
+    hover:border-white/50
+    focus:ring-4
+  `;
 
   return (
-    <main className="min-h-screen bg-[#16345F] text-slate-100">
-      {/* =====================================================
-          CABEÇALHO
-      ====================================================== */}
-      <header>
-        <div className="mx-auto max-w-6xl px-5 pb-10 pt-12 sm:px-8">
-          <div className="max-w-3xl">
-            <div className="mb-5 flex items-center gap-2">
-              <span className="h-2 w-2 bg-[#FF7A00]" />
-              <span className="h-px w-8 bg-[#FF7A00]" />
+    <main className="min-h-screen bg-white text-slate-900">
 
-              <span className="text-xs font-medium text-blue-100/60">
-                Novo projeto
-              </span>
-            </div>
+      {/* =========================================================
+          NAVBAR
+      ========================================================= */}
+      <Navbar />
 
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Cadastrar{" "}
-              <span className="text-[#FF7A00]">projeto</span>
-            </h1>
 
-            <p className="mt-4 max-w-2xl text-base leading-7 text-blue-100/65">
-              Apresente um novo projeto da comunidade escolar e registre
-              quem está participando dele.
-            </p>
-          </div>
-        </div>
-      </header>
+<header className="bg-[#275FCF]">
+  <div className="mx-auto max-w-7xl px-5 pb-14 pt-14 sm:px-8 sm:pb-16 sm:pt-16 lg:px-10 lg:pb-20 lg:pt-20">
+    <div className="max-w-4xl">
+      <div className="mb-6 flex items-center gap-3">
+        <span className="h-2 w-2 bg-[#FF6200]" />
 
-      <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-8">
-        <form onSubmit={handleSubmit} className="space-y-14">
+        <span className="text-sm font-semibold tracking-wide text-white/80">
+          Projetos Donaduzzi
+        </span>
+      </div>
 
-          {/* =====================================================
-              INFORMAÇÕES
-          ====================================================== */}
-          <section>
-            <div className="mb-7">
-              <div className="mb-3 flex items-center gap-3">
-                <span className="h-6 w-1 bg-[#FF7A00]" />
+      <h1 className="max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Cadastre um novo{" "}
+        <span className="text-white">projeto</span>
+      </h1>
 
-                <h2 className="text-xl font-semibold text-[#FF7A00]">
-                  Informações do projeto
-                </h2>
-              </div>
+      <p className="mt-6 max-w-2xl text-base leading-7 text-white/75 sm:text-lg">
+        Registre o projeto, apresente suas ideias e informe os
+        estudantes e professores envolvidos no desenvolvimento.
+      </p>
+    </div>
+  </div>
 
-              <p className="max-w-2xl text-sm leading-6 text-blue-100/65">
-                Informe os dados que serão apresentados na página do
-                projeto.
-              </p>
-            </div>
+  <div className="h-1 bg-[#FF6200]" />
+</header>
 
-            <div className="grid gap-x-8 gap-y-7 lg:grid-cols-2">
+      {/* =========================================================
+          CONTEÚDO
+      ========================================================= */}
+      <section>
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
 
-              {/* Nome */}
-              <div className="lg:col-span-2">
-                <label
-                  htmlFor="titulo"
-                  className="mb-2 block text-sm font-medium text-white"
-                >
-                  Nome do projeto
-                </label>
+          <form onSubmit={handleSubmit}>
 
-                <input
-                  id="titulo"
-                  type="text"
-                  value={titulo}
-                  onChange={(event) => setTitulo(event.target.value)}
-                  placeholder="Ex.: Robótica Sustentável"
-                  className={inputClass("titulo")}
-                  required
-                />
+            {/* =====================================================
+                01 — INFORMAÇÕES
+                BRANCO
+            ====================================================== */}
+            <section className="bg-white px-0 py-14 sm:py-16 lg:py-20">
 
-                {erros.titulo && (
-                  <p className="mt-2 text-xs text-red-300">
-                    {erros.titulo}
-                  </p>
-                )}
-              </div>
+              <div className="grid gap-10 lg:grid-cols-[280px_1fr] lg:gap-16">
 
-              {/* Descrição curta */}
-              <div>
-                <div className="mb-2 flex items-center justify-between">
-                  <label
-                    htmlFor="descricaoCurta"
-                    className="block text-sm font-medium text-white"
-                  >
-                    Descrição curta
-                  </label>
-
-                  <span
-                    className={`text-xs ${
-                      descricaoCurta.length >= 220
-                        ? "text-[#FF7A00]"
-                        : "text-blue-100/50"
-                    }`}
-                  >
-                    {descricaoCurta.length}/250
+                <div>
+                  <span className="mb-3 block text-sm font-semibold text-[#275FCF]">
+                    01
                   </span>
-                </div>
 
-                <textarea
-                  id="descricaoCurta"
-                  value={descricaoCurta}
-                  onChange={(event) => {
-                    if (event.target.value.length <= 250) {
-                      setDescricaoCurta(event.target.value);
-                    }
-                  }}
-                  placeholder="Resuma o projeto em poucas palavras."
-                  rows={5}
-                  maxLength={250}
-                  className={`${inputClass(
-                    "descricaoCurta"
-                  )} resize-none leading-6`}
-                  required
-                />
+                  <h2 className="text-xl font-bold tracking-tight text-slate-950 sm:text-2xl">
+                    Informações do projeto
+                  </h2>
 
-                <p className="mt-2 text-xs text-blue-100/50">
-                  Será exibida no feed.
-                </p>
-
-                {erros.descricaoCurta && (
-                  <p className="mt-2 text-xs text-red-300">
-                    {erros.descricaoCurta}
-                  </p>
-                )}
-              </div>
-
-              {/* Descrição completa */}
-              <div>
-                <label
-                  htmlFor="descricaoLonga"
-                  className="mb-2 block text-sm font-medium text-white"
-                >
-                  Descrição completa
-                </label>
-
-                <textarea
-                  id="descricaoLonga"
-                  value={descricaoLonga}
-                  onChange={(event) =>
-                    setDescricaoLonga(event.target.value)
-                  }
-                  placeholder="Explique os objetivos, desenvolvimento e resultados."
-                  rows={5}
-                  className={`${inputClass(
-                    "descricaoLonga"
-                  )} resize-y leading-6`}
-                  required
-                />
-
-                <p className="mt-2 text-xs text-blue-100/50">
-                  Será exibida na página do projeto.
-                </p>
-
-                {erros.descricaoLonga && (
-                  <p className="mt-2 text-xs text-red-300">
-                    {erros.descricaoLonga}
-                  </p>
-                )}
-              </div>
-            </div>
-          </section>
-
-          {/* =====================================================
-              EQUIPE
-          ====================================================== */}
-          <section>
-            <div className="mb-7">
-              <div className="mb-3 flex items-center gap-3">
-                <span className="h-6 w-1 bg-[#FF7A00]" />
-
-                <h2 className="text-xl font-semibold text-[#FF7A00]">
-                  Equipe
-                </h2>
-              </div>
-
-              <p className="max-w-2xl text-sm leading-6 text-blue-100/65">
-                Informe os alunos e professores que participam ou
-                acompanham o projeto.
-              </p>
-            </div>
-
-            <div className="grid gap-12 lg:grid-cols-2">
-
-              {/* =====================================================
-                  ALUNOS
-              ====================================================== */}
-              <div>
-                <div className="mb-6">
-                  <h3 className="text-base font-semibold text-white">
-                    Alunos participantes
-                  </h3>
-
-                  <p className="mt-1.5 text-sm leading-5 text-blue-100/60">
-                    Informe os alunos que fazem parte da equipe.
+                  <p className="mt-3 max-w-xs text-sm leading-6 text-slate-500">
+                    Apresente as principais informações que serão
+                    utilizadas na página do projeto.
                   </p>
                 </div>
 
-                <div className="mb-6 max-w-[180px]">
-                  <label
-                    htmlFor="quantidadeAlunos"
-                    className="mb-2 block text-sm font-medium text-white"
-                  >
-                    Quantidade
-                  </label>
+                <div className="space-y-8">
 
-                  <select
-                    id="quantidadeAlunos"
-                    value={quantidadeAlunos}
-                    onChange={(event) =>
-                      alterarQuantidadeAlunos(
-                        Number(event.target.value)
-                      )
-                    }
-                    className={`${inputClass(
-                      "alunos"
-                    )} cursor-pointer appearance-auto`}
-                  >
-                    {Array.from(
-                      { length: 10 },
-                      (_, index) => index + 1
-                    ).map((quantidade) => (
-                      <option
-                        key={quantidade}
-                        value={quantidade}
-                        className="bg-[#1B3D6D] text-white"
-                      >
-                        {quantidade}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                  {/* Nome */}
+                  <div>
+                    <label
+                      htmlFor="titulo"
+                      className="mb-2 block text-sm font-semibold text-slate-800"
+                    >
+                      Nome do projeto
+                    </label>
 
-                <div className="space-y-5">
-                  {alunos.map((aluno, index) => (
-                    <div key={index}>
-                      <label
-                        htmlFor={`aluno-${index}`}
-                        className="mb-2 block text-sm font-medium text-white"
-                      >
-                        Aluno {index + 1}
-                      </label>
+                    <input
+                      id="titulo"
+                      type="text"
+                      value={titulo}
+                      onChange={(event) =>
+                        setTitulo(event.target.value)
+                      }
+                      placeholder="Ex.: Robótica Sustentável"
+                      className={inputClass("titulo")}
+                      required
+                    />
 
-                      <input
-                        id={`aluno-${index}`}
-                        type="text"
-                        value={aluno.nome}
-                        onChange={(event) =>
-                          alterarNomeAluno(
-                            index,
-                            event.target.value
-                          )
-                        }
-                        placeholder="Nome completo"
-                        className={inputClass(`aluno-${index}`)}
+                    {erros.titulo && (
+                      <p className="mt-2 text-xs text-red-500">
+                        {erros.titulo}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Descrições */}
+                  <div className="grid gap-8 lg:grid-cols-2">
+
+                    {/* Descrição curta */}
+                    <div>
+                      <div className="mb-2 flex items-center justify-between gap-4">
+
+                        <label
+                          htmlFor="descricaoCurta"
+                          className="block text-sm font-semibold text-slate-800"
+                        >
+                          Descrição curta
+                        </label>
+
+                        <span
+                          className={`shrink-0 text-xs ${
+                            descricaoCurta.length >= 220
+                              ? "font-semibold text-[#FF6200]"
+                              : "text-slate-400"
+                          }`}
+                        >
+                          {descricaoCurta.length}/250
+                        </span>
+
+                      </div>
+
+                      <textarea
+                        id="descricaoCurta"
+                        value={descricaoCurta}
+                        onChange={(event) => {
+                          if (event.target.value.length <= 250) {
+                            setDescricaoCurta(event.target.value);
+                          }
+                        }}
+                        placeholder="Resuma o projeto em poucas palavras."
+                        rows={6}
+                        maxLength={250}
+                        className={`${inputClass(
+                          "descricaoCurta"
+                        )} resize-none leading-6`}
                         required
                       />
 
-                      {erros[`aluno-${index}`] && (
-                        <p className="mt-2 text-xs text-red-300">
-                          {erros[`aluno-${index}`]}
+                      <p className="mt-2 text-xs text-slate-400">
+                        Será exibida no feed de projetos.
+                      </p>
+
+                      {erros.descricaoCurta && (
+                        <p className="mt-2 text-xs text-red-500">
+                          {erros.descricaoCurta}
                         </p>
                       )}
                     </div>
-                  ))}
+
+                    {/* Descrição completa */}
+                    <div>
+                      <label
+                        htmlFor="descricaoLonga"
+                        className="mb-2 block text-sm font-semibold text-slate-800"
+                      >
+                        Descrição completa
+                      </label>
+
+                      <textarea
+                        id="descricaoLonga"
+                        value={descricaoLonga}
+                        onChange={(event) =>
+                          setDescricaoLonga(event.target.value)
+                        }
+                        placeholder="Explique os objetivos, desenvolvimento e resultados."
+                        rows={6}
+                        className={`${inputClass(
+                          "descricaoLonga"
+                        )} resize-y leading-6`}
+                        required
+                      />
+
+                      <p className="mt-2 text-xs text-slate-400">
+                        Será exibida na página individual do projeto.
+                      </p>
+
+                      {erros.descricaoLonga && (
+                        <p className="mt-2 text-xs text-red-500">
+                          {erros.descricaoLonga}
+                        </p>
+                      )}
+                    </div>
+
+                  </div>
+
                 </div>
+
               </div>
+            </section>
 
-              {/* =====================================================
-                  PROFESSORES
-              ====================================================== */}
-              <div>
-                <div className="mb-6">
-                  <h3 className="text-base font-semibold text-white">
-                    Professores
-                  </h3>
+            {/* =====================================================
+                02 — PARTICIPANTES
+                AZUL
+            ====================================================== */}
+            <section className="bg-[#275FCF] px-6 py-14 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
 
-                  <p className="mt-1.5 text-sm leading-5 text-blue-100/60">
-                    Defina quem acompanha e orienta o projeto.
+              <div className="grid gap-10 lg:grid-cols-[280px_1fr] lg:gap-16">
+
+                <div>
+                  <span className="mb-3 block text-sm font-semibold text-white/60">
+                    02
+                  </span>
+
+                  <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+                    Participantes
+                  </h2>
+
+                  <p className="mt-3 max-w-xs text-sm leading-6 text-white/70">
+                    Informe os estudantes que fazem parte da equipe
+                    responsável pelo projeto.
                   </p>
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="professor"
-                    className="mb-2 block text-sm font-medium text-white"
-                  >
-                    Professor responsável
-                  </label>
 
-                  <input
-                    id="professor"
-                    type="text"
-                    value={professor}
-                    onChange={(event) =>
-                      setProfessor(event.target.value)
-                    }
-                    placeholder="Nome do professor"
-                    className={inputClass("professor")}
-                    required
-                  />
+                  {/* Quantidade */}
+                  <div className="mb-8 max-w-[180px]">
 
-                  {erros.professor && (
-                    <p className="mt-2 text-xs text-red-300">
-                      {erros.professor}
-                    </p>
-                  )}
-                </div>
-
-                {/* Orientador */}
-                <div className="mt-9 pt-7">
-                  <div className="flex items-start justify-between gap-6">
-                    <div>
-                      <p className="text-sm font-medium text-white">
-                        Professor orientador
-                      </p>
-
-                      <p className="mt-1.5 max-w-md text-xs leading-5 text-blue-100/55">
-                        Ative se houver um professor orientador
-                        diferente do responsável.
-                      </p>
-                    </div>
-
-                    <button
-                      type="button"
-                      role="switch"
-                      aria-checked={temOrientador}
-                      aria-label="Projeto terá professor orientador"
-                      onClick={() =>
-                        alternarOrientador(!temOrientador)
-                      }
-                      className={`
-                        relative mt-0.5 h-5 w-9 shrink-0
-                        border
-                        transition-colors
-                        focus:outline-none
-                        focus:ring-2
-                        focus:ring-[#FF7A00]/30
-                        ${
-                          temOrientador
-                            ? "border-[#FF7A00] bg-[#FF7A00]"
-                            : "border-white/[0.15] bg-[#1B3D6D]"
-                        }
-                      `}
+                    <label
+                      htmlFor="quantidadeAlunos"
+                      className="mb-2 block text-sm font-semibold text-white"
                     >
-                      <span
-                        className={`
-                          absolute top-0.5 h-3.5 w-3.5 bg-white
-                          transition-transform duration-150
-                          ${
-                            temOrientador
-                              ? "translate-x-[17px]"
-                              : "translate-x-0.5"
-                          }
-                        `}
-                      />
-                    </button>
+                      Quantidade de alunos
+                    </label>
+
+                    <select
+                      id="quantidadeAlunos"
+                      value={quantidadeAlunos}
+                      onChange={(event) =>
+                        alterarQuantidadeAlunos(
+                          Number(event.target.value)
+                        )
+                      }
+                      className="
+                        w-full
+                        border
+                        border-white/25
+                        bg-white
+                        px-4
+                        py-3
+                        text-sm
+                        text-slate-800
+                        outline-none
+                        transition
+                        hover:border-white/50
+                        focus:border-white
+                        focus:ring-4
+                        focus:ring-white/10
+                      "
+                    >
+                      {Array.from(
+                        { length: 10 },
+                        (_, index) => index + 1
+                      ).map((quantidade) => (
+                        <option
+                          key={quantidade}
+                          value={quantidade}
+                        >
+                          {quantidade}
+                        </option>
+                      ))}
+                    </select>
+
                   </div>
 
-                  {temOrientador && (
-                    <div className="mt-5">
+                  {/* Alunos */}
+                  <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+
+                    {alunos.map((aluno, index) => (
+                      <div key={index}>
+
+                        <label
+                          htmlFor={`aluno-${index}`}
+                          className="mb-2 block text-sm font-semibold text-white"
+                        >
+                          Aluno {index + 1}
+                        </label>
+
+                        <input
+                          id={`aluno-${index}`}
+                          type="text"
+                          value={aluno.nome}
+                          onChange={(event) =>
+                            alterarNomeAluno(
+                              index,
+                              event.target.value
+                            )
+                          }
+                          placeholder="Nome completo"
+                          className={blueInputClass(
+                            `aluno-${index}`
+                          )}
+                          required
+                        />
+
+                        {erros[`aluno-${index}`] && (
+                          <p className="mt-2 text-xs text-red-200">
+                            {erros[`aluno-${index}`]}
+                          </p>
+                        )}
+
+                      </div>
+                    ))}
+
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+
+            {/* =====================================================
+                03 — PROFESSORES
+                AZUL
+            ====================================================== */}
+            <section className="bg-[#275FCF] px-6 pb-16 pt-0 sm:px-10 sm:pb-20 lg:px-14">
+
+              <div className="border-t border-white/15 pt-14 sm:pt-16 lg:pt-20">
+
+                <div className="grid gap-10 lg:grid-cols-[280px_1fr] lg:gap-16">
+
+                  <div>
+                    <span className="mb-3 block text-sm font-semibold text-white/60">
+                      03
+                    </span>
+
+                    <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+                      Professores
+                    </h2>
+
+                    <p className="mt-3 max-w-xs text-sm leading-6 text-white/70">
+                      Defina os professores responsáveis pelo
+                      acompanhamento do projeto.
+                    </p>
+                  </div>
+
+                  <div className="space-y-10">
+
+                    {/* Professor responsável */}
+                    <div>
                       <label
-                        htmlFor="orientador"
-                        className="mb-2 block text-sm font-medium text-white"
+                        htmlFor="professor"
+                        className="mb-2 block text-sm font-semibold text-white"
                       >
-                        Nome do professor orientador
+                        Professor responsável
                       </label>
 
                       <input
-                        id="orientador"
+                        id="professor"
                         type="text"
-                        value={orientador}
+                        value={professor}
                         onChange={(event) =>
-                          setOrientador(event.target.value)
+                          setProfessor(event.target.value)
                         }
                         placeholder="Nome do professor"
-                        className={inputClass("orientador")}
-                        required={temOrientador}
+                        className={blueInputClass("professor")}
+                        required
                       />
 
-                      {erros.orientador && (
-                        <p className="mt-2 text-xs text-red-300">
-                          {erros.orientador}
+                      {erros.professor && (
+                        <p className="mt-2 text-xs text-red-200">
+                          {erros.professor}
                         </p>
                       )}
                     </div>
-                  )}
+
+                    {/* Orientador */}
+                    <div className="border-t border-white/15 pt-8">
+
+                      <div className="flex items-start justify-between gap-8">
+
+                        <div>
+                          <p className="text-sm font-semibold text-white">
+                            Professor orientador
+                          </p>
+
+                          <p className="mt-1.5 max-w-xl text-sm leading-6 text-white/65">
+                            Ative esta opção caso exista um professor
+                            orientador diferente do responsável.
+                          </p>
+                        </div>
+
+                        <button
+                          type="button"
+                          role="switch"
+                          aria-checked={temOrientador}
+                          aria-label="Projeto terá professor orientador"
+                          onClick={() =>
+                            alternarOrientador(!temOrientador)
+                          }
+                          className={`
+                            relative
+                            mt-1
+                            h-6
+                            w-11
+                            shrink-0
+                            border
+                            transition-colors
+                            focus:outline-none
+                            focus:ring-4
+                            focus:ring-white/15
+                            ${
+                              temOrientador
+                                ? "border-[#FF6200] bg-[#FF6200]"
+                                : "border-white/30 bg-white/10"
+                            }
+                          `}
+                        >
+                          <span
+                            className={`
+                              absolute
+                              top-0.5
+                              h-5
+                              w-5
+                              bg-white
+                              shadow-sm
+                              transition-transform
+                              duration-150
+                              ${
+                                temOrientador
+                                  ? "translate-x-[21px]"
+                                  : "translate-x-0.5"
+                              }
+                            `}
+                          />
+                        </button>
+
+                      </div>
+
+                      {temOrientador && (
+                        <div className="mt-6">
+
+                          <label
+                            htmlFor="orientador"
+                            className="mb-2 block text-sm font-semibold text-white"
+                          >
+                            Nome do professor orientador
+                          </label>
+
+                          <input
+                            id="orientador"
+                            type="text"
+                            value={orientador}
+                            onChange={(event) =>
+                              setOrientador(event.target.value)
+                            }
+                            placeholder="Nome do professor"
+                            className={blueInputClass("orientador")}
+                            required={temOrientador}
+                          />
+
+                          {erros.orientador && (
+                            <p className="mt-2 text-xs text-red-200">
+                              {erros.orientador}
+                            </p>
+                          )}
+
+                        </div>
+                      )}
+
+                    </div>
+
+                  </div>
+
                 </div>
+
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* =====================================================
-              SUCESSO
-          ====================================================== */}
-          {sucesso && (
-            <div className="border-l-2 border-[#FF7A00] bg-[#1B3D6D] px-5 py-4">
-              <p className="text-sm font-semibold text-white">
-                Projeto cadastrado com sucesso.
-              </p>
+            {/* =====================================================
+                SUCESSO — BRANCO
+            ====================================================== */}
+            {sucesso && (
+              <section className="bg-white py-10">
 
-              <p className="mt-1 text-xs text-blue-100/60">
-                Os dados foram registrados no console do navegador.
-              </p>
-            </div>
-          )}
+                <div className="border-l-4 border-[#275FCF] bg-slate-50 px-6 py-5">
 
-          {/* =====================================================
-              AÇÕES
-          ====================================================== */}
-          <div className="flex flex-col-reverse items-stretch justify-end gap-3 border-t border-white/[0.08] pt-7 sm:flex-row sm:items-center">
-            <button
-              type="button"
-              className="
-                px-4 py-2.5
-                text-sm font-medium
-                text-blue-100/65
-                transition-colors
-                hover:text-white
-                focus:outline-none
-              "
-            >
-              Cancelar
-            </button>
+                  <p className="text-sm font-bold text-slate-900">
+                    Projeto cadastrado com sucesso.
+                  </p>
 
-            <button
-              type="submit"
-              className="
-                bg-[#FF7A00]
-                px-6 py-3
-                text-sm font-semibold
-                text-white
-                transition-colors
-                hover:bg-[#FF8B1A]
-                active:bg-[#E66D00]
-                focus:outline-none
-                focus:ring-2
-                focus:ring-[#FF7A00]/30
-                focus:ring-offset-2
-                focus:ring-offset-[#16345F]
-              "
-            >
-              Cadastrar projeto
-            </button>
-          </div>
-        </form>
+                  <p className="mt-1 text-sm text-slate-500">
+                    Os dados foram registrados no console do navegador.
+                  </p>
+
+                </div>
+
+              </section>
+            )}
+
+            {/* =====================================================
+                AÇÕES — BRANCO
+            ====================================================== */}
+            <section className="bg-white py-10">
+
+              <div className="flex flex-col gap-6 border-t border-slate-200 pt-8 sm:flex-row sm:items-center sm:justify-between">
+
+                <p className="max-w-lg text-xs leading-5 text-slate-400">
+                  Revise as informações antes de cadastrar o projeto.
+                  Todos os campos obrigatórios precisam estar
+                  preenchidos.
+                </p>
+
+                <div className="flex flex-col-reverse gap-3 sm:flex-row">
+
+                  <button
+                    type="button"
+                    className="
+                      border
+                      border-slate-200
+                      px-6
+                      py-3
+                      text-sm
+                      font-semibold
+                      text-slate-600
+                      transition-colors
+                      hover:border-slate-300
+                      hover:bg-slate-50
+                      hover:text-slate-900
+                      focus:outline-none
+                      focus:ring-4
+                      focus:ring-slate-200
+                    "
+                  >
+                    Cancelar
+                  </button>
+
+                  <button
+                    type="submit"
+                    className="
+                      bg-[#275FCF]
+                      px-7
+                      py-3
+                      text-sm
+                      font-semibold
+                      text-white
+                      transition-colors
+                      hover:bg-[#1F55C0]
+                      active:bg-[#1949A8]
+                      focus:outline-none
+                      focus:ring-4
+                      focus:ring-[#275FCF]/20
+                    "
+                  >
+                    Cadastrar projeto
+                  </button>
+
+                </div>
+
+              </div>
+
+            </section>
+
+          </form>
+        </div>
       </section>
     </main>
   );
 }
+
