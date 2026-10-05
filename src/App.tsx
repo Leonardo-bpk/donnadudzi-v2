@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
@@ -10,6 +9,7 @@ import ProjetosDestaque from './components/ProjetosDestaque'
 import Footer from './components/Footer'
 import Perfil from './pages/Perfil'
 import Projetos from './pages/Projetos'
+import Dashboard from './pages/Dashboard'
 
 import InversionCircleScrollAnimation from './components/InversionCircleScrollAnimation'
 
@@ -65,6 +65,11 @@ function App() {
         <Route
           path="/perfil"
           element={<Perfil />}
+        />
+
+        <Route
+          path="/admin"
+          element={<Dashboard />}
         />
       </Routes>
     </BrowserRouter>
